@@ -1,0 +1,23 @@
+{
+  "name": "mercury",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "author": "KiritoDv",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node bin/src/main.js",
+    "build": "tsc -p tsconfig.json",
+    "dev": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts"
+  },
+  "_moduleAliases": {
+    "@app": "bin/src"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.31.1",
+    "discord.js": "^13.6.0",
+    "module-alias": "^2.2.2"
+  }
+}
