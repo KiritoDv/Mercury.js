@@ -1,5 +1,4 @@
 import BotCommon from "@app/providers/common";
-import DiscordProvider from "@app/providers/discord";
 import { Interaction } from "discord.js";
 
 type CMDFunc = (interaction: Interaction) => void;
@@ -37,7 +36,7 @@ const _DBInstances = new Map<string, any>();
 const SubMethods = Symbol('SubMethods');
 
 function _MethodImplementation(entry: CommandEntry) {
-    console.log(`[Mercury] Registering ${RequestType[entry.type]}: ` + entry.cmd);
+    console.log(`[Mercury.js] Registering ${RequestType[entry.type]}: ` + entry.cmd);
     switch(entry.type){
         case RequestType.COMMAND:
             BotCommon.cmds.set(entry.cmd, entry);

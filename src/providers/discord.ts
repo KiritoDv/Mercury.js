@@ -5,7 +5,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { dirscan } from '@app/utils/fs-utils';
 import { Client, Intents } from 'discord.js'
 import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v9';
+import { Routes } from 'discord-api-types/v10';
 import BotCommon from './common';
 
 class DiscordProvider {
@@ -21,7 +21,7 @@ class DiscordProvider {
     }
 
     async register(){
-        const rest = new REST({ version: '9' }).setToken(this.token);
+        const rest = new REST({ version: '10' }).setToken(this.token);
         const commands: any[] = Array.from( BotCommon.cmds.values() ).map((c): any => {
             const cmd = new SlashCommandBuilder();
             cmd.setName(c.cmd);
@@ -92,7 +92,7 @@ class DiscordProvider {
         await this.registerCommands();
 
         this.bot.on('ready', async () => {
-            console.log(`[Discord] Logged in as ${this.bot.user!.tag}!`);
+            console.log(`[Discord::Instance] Logged in as ${this.bot.user!.tag}!`);
             await this.register();
             await this.initCommands();
         });

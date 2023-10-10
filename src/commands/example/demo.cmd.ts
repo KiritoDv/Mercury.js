@@ -1,22 +1,24 @@
 import { MercuryHandler, Command, Inject, ArgumentType } from '@app/types/router';
-import { Client, CommandInteraction, MessageAttachment, MessageEmbed, TextChannel } from 'discord.js';
+import { Client, CommandInteraction } from 'discord.js';
 
+// You can use the @MercuryHandler decorator to register a class as a handler.
+// Mercury.js will automatically scan the class for @Command decorators.
 @MercuryHandler
-class DemoCommands {
+class DemoHandler {
 
     @Inject("client")
     bot: Client | undefined;
 
-    @Command("no-args", "Demo command with no arguments")
-    async no_args (interaction: CommandInteraction) {
-        await interaction.reply("Hi, I'm a demo command with no arguments!");
+    @Command("ping", "Pong!")
+    async ping (interaction: CommandInteraction) {
+        await interaction.reply("Pong!");
     }
 
-    @Command("test-args", "Demo arg", [{ name: "arg", description: "Reads an arg", type: ArgumentType.STRING, required: true }])
-    async test (interaction: CommandInteraction) {
-        let arg = interaction.options.getString("arg");
-        await interaction.reply(arg);
+    @Command("echo", "Message", [{ name: "msg", description: "Send message", type: ArgumentType.STRING, required: true }])
+    async echo (interaction: CommandInteraction) {
+        let msg = interaction.options.getString("msg");
+        await interaction.reply(msg ?? "No message provided");
     }
 }
 
-export default new DemoCommands();
+export default new DemoHandler();
